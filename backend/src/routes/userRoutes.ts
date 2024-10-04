@@ -28,21 +28,21 @@ usersRoutes.get("/:id", async (req: Request, res: Response) => {
   }
 });
 
-usersRoutes.post("/", async (req: Request, res: Response) => {
-  const { email, password } = req.body;
+// usersRoutes.post("/", async (req: Request, res: Response) => {
+//   const { email, password } = req.body;
 
-  try {
-    const newUser = await prisma.user.create({
-      data: {
-        email: email,
-        password: password,
-      },
-    });
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(500).json({ err: "Failed to add new user." });
-  }
-});
+//   try {
+//     const newUser = await prisma.user.create({
+//       data: {
+//         email: email,
+//         password: password,
+//       },
+//     });
+//     res.status(201).json(newUser);
+//   } catch (err) {
+//     res.status(500).json({ err: "Failed to add new user." });
+//   }
+// });
 
 usersRoutes.patch("/:id", async (req: Request, res: Response) => {
   const { id } = req.params;
