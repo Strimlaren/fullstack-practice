@@ -1,0 +1,7 @@
+https://nerdcave.com/tailwind-cheat-sheet
+
+https://console.neon.tech/app/projects/floral-smoke-83752530/branches/br-crimson-block-a2tttbfo/tables?database=email-app-db
+
+https://www.prisma.io/docs/orm/prisma-client/queries/crud#update
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#client_error_responses
