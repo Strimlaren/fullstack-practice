@@ -28,7 +28,6 @@ campaignRoutes.get("/", async (req: Request, res: Response): Promise<any> => {
     return res.status(500).json({ message: "Could not fetch campaigns.", err });
   }
 });
-
 // GET SPECIFIC CAMPAIGN
 campaignRoutes.get(
   "/:id",
