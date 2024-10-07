@@ -1,5 +1,8 @@
 import { loginModalProps } from "../types/types";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import { EnvelopeOpenIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
 
 const LoginModal = ({
   setIsModalOpen,
@@ -8,8 +11,9 @@ const LoginModal = ({
 }: loginModalProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     const response = await fetch("/api/auth/login", {
@@ -28,6 +32,7 @@ const LoginModal = ({
       setIsLoggedIn(true);
       setIsModalOpen(false);
       console.log("Logged in successfully");
+      navigate("/");
     } else {
       console.log("Something went wrong");
       console.log(response);
@@ -39,8 +44,8 @@ const LoginModal = ({
       onClick={() => setIsModalOpen(false)}
       className="absolute flex flex-col justify-center items-center bg-black bg-opacity-60 w-screen h-screen">
       <div className="flex flex-col w-96 p-0 rounded-md items-center">
-        <p className="text-white">ICON</p>
-        <h2 className="text-3xl text-white">Welcome to SPAM Email</h2>
+        <EnvelopeIcon className="size-7 text-white" />
+        <h2 className="text-3xl text-white">Login to SPAM Email</h2>
         <div
           onClick={(e) => e.stopPropagation()}
           className="bg-white flex border p-3 border-gray-400 flex-col w-full mt-3 rounded-md shadow-md">
@@ -113,9 +118,11 @@ const LoginModal = ({
           </form>
         </div>
         <div className="flex justify-center mt-5 w-full">
-          <p className="text-slate-900">
+          <p className="text-slate-700">
             Don't have an account?
-            <a> Register</a>
+            <Link to="/register">
+              <a className="text-slate-700 hover:text-slate-900"> Register</a>
+            </Link>
           </p>
         </div>
       </div>

@@ -8,6 +8,16 @@
   font-family: "Baloo Paaji 2", sans-serif;
 }
 
+html,
+body {
+  height: 100vh;
+}
+
+.test11 {
+  min-height: 100vh;
+  overflow: hidden;
+}
+
 .button1 {
   padding: .5rem 1rem;
   color: whitesmoke;
@@ -19,4 +29,11 @@
 .button1:hover {
   background-color: black;
   cursor: pointer;
+}
+
+.loadingButton {
+  padding: .5rem 1rem;
+  color: whitesmoke;
+  background-color: rgb(26, 26, 26);
+  border-radius: 4px;
 }
