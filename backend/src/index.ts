@@ -9,7 +9,7 @@ import authRoutes from "./routes/authenticationRoutes";
 
 const app = express();
 const PgSessionStore = pgSession(session);
-
+require("dotenv").config();
 app.use(express.json());
 app.use(
   session({
@@ -34,4 +34,4 @@ app.use("/api/users", usersRoutes);
 app.use("/api/campaigns", campaignRoutes);
 
 const PORT = 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}.`));
