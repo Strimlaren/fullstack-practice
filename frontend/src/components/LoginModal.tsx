@@ -13,8 +13,8 @@ const LoginModal = ({
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
     const response = await fetch("/api/auth/login", {
       method: "POST",
@@ -100,11 +100,9 @@ const LoginModal = ({
               </div>
 
               <div className="text-sm">
-                <a
-                  href="#"
-                  className="font-medium text-slate-600 hover:text-slate-900">
+                <p className="font-medium text-slate-600 hover:text-slate-900">
                   Forgot your password?
-                </a>
+                </p>
               </div>
             </div>
 
