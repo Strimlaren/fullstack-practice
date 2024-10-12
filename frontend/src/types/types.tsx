@@ -17,4 +17,9 @@ export interface loginModalProps {
 
 export interface registerProps {
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handlePopup: Function;
+}
+
+export interface messagePopupProps {
+  message: string;
 }

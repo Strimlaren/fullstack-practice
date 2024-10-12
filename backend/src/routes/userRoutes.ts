@@ -13,13 +13,13 @@ usersRoutes.get("/", async (req: Request, res: Response) => {
   }
 });
 
-usersRoutes.get("/:id", async (req: Request, res: Response) => {
-  const { id } = req.params;
+usersRoutes.get("/:email", async (req: Request, res: Response) => {
+  const { email } = req.params;
 
   try {
     const user = await prisma.user.findUnique({
       where: {
-        id: id,
+        email: email,
       },
     });
     res.status(200).json({ user });

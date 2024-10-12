@@ -42,9 +42,9 @@ const LoginModal = ({
   return (
     <div
       onClick={() => setIsModalOpen(false)}
-      className="absolute flex flex-col justify-center items-center bg-black bg-opacity-60 w-screen h-screen">
+      className="absolute flex flex-col justify-center items-center bg-black bg-opacity-80 w-screen h-screen z-10">
       <div className="flex flex-col w-96 p-0 rounded-md items-center">
-        <EnvelopeIcon className="size-7 text-white" />
+        <EnvelopeOpenIcon className="size-7 text-white mb-3" />
         <h2 className="text-3xl text-white">Login to SPAM Email</h2>
         <div
           onClick={(e) => e.stopPropagation()}
@@ -116,10 +116,13 @@ const LoginModal = ({
           </form>
         </div>
         <div className="flex justify-center mt-5 w-full">
-          <p className="text-slate-700">
+          <p className="text-slate-400">
             Don't have an account?
             <Link to="/register">
-              <a className="text-slate-700 hover:text-slate-900"> Register</a>
+              <p className="text-slate-500 hover:text-slate-700 inline">
+                {" "}
+                Register
+              </p>
             </Link>
           </p>
         </div>

@@ -12,6 +12,7 @@ const Header = ({
 }: headerProps) => {
   const handleLogout = async () => {
     await fetch("/api/auth/logout");
+
     setLoggedUser("");
     setIsLoggedIn(false);
   };

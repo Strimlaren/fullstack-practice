@@ -8,12 +8,14 @@ import { Routes, Route, Link } from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
 import Register from "./pages/Register";
+import MessagePopup from "./components/MessagePopup";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [loggedUser, setLoggedUser] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [popupMessage, setPopupMessage] = useState<string>("");
 
   // Checks if the user is still logged on
   useEffect(() => {
@@ -24,7 +26,7 @@ const App = () => {
       .then((data) => {
         if (data.user) {
           setIsLoggedIn(true);
-          setLoggedUser(data.user);
+          setLoggedUser(data.user.email);
           setIsLoading(false);
         } else {
           setIsLoggedIn(false);
@@ -37,8 +39,18 @@ const App = () => {
       });
   }, []);
 
+  const handlePopup = async (message: string) => {
+    setPopupMessage(message);
+    setTimeout(() => {
+      setPopupMessage("");
+    }, 3000);
+  };
+
   return (
     <div className="flex flex-col test11">
+      {popupMessage.length > 0 ? (
+        <MessagePopup message={popupMessage} />
+      ) : undefined}
       {isModalOpen ? (
         <LoginModal
           setIsModalOpen={setIsModalOpen}
@@ -58,7 +70,12 @@ const App = () => {
         <Routes>
           <Route
             path="/register"
-            element={<Register setIsModalOpen={setIsModalOpen} />}
+            element={
+              <Register
+                setIsModalOpen={setIsModalOpen}
+                handlePopup={handlePopup}
+              />
+            }
           />
           <Route path="/" element={<Welcome />} />
         </Routes>

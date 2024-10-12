@@ -3,6 +3,16 @@ import { Strategy as LocalStrategy } from "passport-local";
 import bcrypt from "bcrypt";
 import prisma from "../db/prisma";
 
+declare global {
+  namespace Express {
+    interface User {
+      id: string;
+      email: string;
+      password: string;
+    }
+  }
+}
+
 passport.use(
   new LocalStrategy(
     { usernameField: "email" },
@@ -38,7 +48,8 @@ passport.deserializeUser(async (id: string, done) => {
         id: id,
       },
     });
-    done(null, user);
+
+    if (user) done(null, user);
   } catch (err) {
     done(err);
   }

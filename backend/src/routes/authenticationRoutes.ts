@@ -22,27 +22,33 @@ authRoutes.post(
     const { email, password } = req.body;
     const hashedPass = await bcrypt.hash(password, 10);
 
-    const existingUser = await prisma.user.findUnique({
-      where: {
-        email: email,
-      },
-    });
-
-    if (existingUser)
-      return res.status(406).json({ message: `User ${email} already exists.` });
-
     try {
+      const existingUser = await prisma.user.findUnique({
+        where: {
+          email: email,
+        },
+      });
+
+      if (existingUser) {
+        return res
+          .status(406)
+          .json({ message: `User ${email} already exists.`, user: null });
+      }
+
       const newUser = await prisma.user.create({
         data: {
           email: email,
           password: hashedPass,
         },
       });
-      res
+
+      return res
         .status(200)
         .json({ message: "Successfully created user", user: newUser });
     } catch (err) {
-      res.status(500).json({ err, message: "Error creating user" });
+      return res
+        .status(500)
+        .json({ message: "Error creating user", user: null });
     }
   }
 );
@@ -50,10 +56,10 @@ authRoutes.post(
 authRoutes.get("/status", (req: Request, res: Response): any => {
   const user = req.user as User;
 
-  if (req.user) {
+  if (user) {
     return res
       .status(200)
-      .json({ message: `User ${user.email} is logged in.`, user: user.email });
+      .json({ message: `User ${user.email} is logged in.`, user: user });
   }
   res.status(401).json({ message: "No user is logged in" });
 });
