@@ -122,11 +122,6 @@ const Register = ({ setIsModalOpen, handlePopup }: registerProps) => {
             </div>
 
             <div className="relative">
-              {/* {message !== "" ? (
-                <p className="text-red-600 text-sm text-center absolute left-2/4 bottom-13 transform -translate-x-1/2">
-                  {message}
-                </p>
-              ) : undefined} */}
               <button
                 type="submit"
                 className="w-full bg-slate-800 text-white px-4 py-2 rounded-md shadow-sm hover:bg-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 mt-6">

@@ -31,6 +31,12 @@ body {
   cursor: pointer;
 }
 
+.button1:hover .toaster {
+  /* background-color: rgb(223, 223, 223); */
+  color: rgb(194 65 12);
+  cursor: pointer;
+}
+
 .loadingButton {
   padding: .5rem 1rem;
   color: whitesmoke;

@@ -1,10 +1,12 @@
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoginModal from "./components/LoginModal";
+import Campaigns from "./pages/Campaigns";
+import Emails from "./pages/Emails";
 
 import { useState, useEffect } from "react";
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import Welcome from "./pages/Welcome";
 import Register from "./pages/Register";
@@ -56,6 +58,7 @@ const App = () => {
           setIsModalOpen={setIsModalOpen}
           setIsLoggedIn={setIsLoggedIn}
           setLoggedUser={setLoggedUser}
+          handlePopup={handlePopup}
         />
       ) : undefined}
       <Header
@@ -65,6 +68,7 @@ const App = () => {
         loggedUser={loggedUser}
         setLoggedUser={setLoggedUser}
         isLoading={isLoading}
+        handlePopup={handlePopup}
       />
       <div className="flex justify-center items-center">
         <Routes>
@@ -76,6 +80,14 @@ const App = () => {
                 handlePopup={handlePopup}
               />
             }
+          />
+          <Route
+            path="/campaigns"
+            element={<Campaigns handlePopup={handlePopup} />}
+          />
+          <Route
+            path="/emails"
+            element={<Emails handlePopup={handlePopup} />}
           />
           <Route path="/" element={<Welcome />} />
         </Routes>

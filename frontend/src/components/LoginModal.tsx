@@ -2,12 +2,13 @@ import { loginModalProps } from "../types/types";
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 
-import { EnvelopeOpenIcon, EnvelopeIcon } from "@heroicons/react/24/outline";
+import { EnvelopeOpenIcon } from "@heroicons/react/24/outline";
 
 const LoginModal = ({
   setIsModalOpen,
   setIsLoggedIn,
   setLoggedUser,
+  handlePopup,
 }: loginModalProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -31,11 +32,11 @@ const LoginModal = ({
       setLoggedUser(email);
       setIsLoggedIn(true);
       setIsModalOpen(false);
-      console.log("Logged in successfully");
-      navigate("/");
+      handlePopup(`Welcome, ${email}`);
+      navigate("/campaigns");
     } else {
-      console.log("Something went wrong");
-      console.log(response);
+      handlePopup(`Authentication failed.`);
+      navigate("/");
     }
   };
 
