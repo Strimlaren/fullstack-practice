@@ -1,6 +1,5 @@
 import { headerProps } from "../types/types";
 import { EnvelopeOpenIcon } from "@heroicons/react/24/outline";
-import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = ({
@@ -11,9 +10,11 @@ const Header = ({
   setLoggedUser,
   isLoading,
   handlePopup,
+  campaignData,
 }: headerProps) => {
-  const [campaignCount, setCampaignCount] = useState<number>(0);
   const navigate = useNavigate();
+
+  console.log(campaignData);
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout");
@@ -24,10 +25,6 @@ const Header = ({
     navigate("/");
   };
 
-  useEffect(() => {
-    getCampaignCount();
-  }, []);
-
   const navContent = () => {
     return (
       <aside className="flex gap-2">
@@ -35,7 +32,7 @@ const Header = ({
           <p className="button1">
             Campaigns{" "}
             <span className="bg-white text-black ml-1 px-3 rounded-full font-semibold toaster">
-              {campaignCount}
+              {campaignData.length}
             </span>
           </p>
         </Link>
@@ -47,16 +44,6 @@ const Header = ({
         </a>
       </aside>
     );
-  };
-
-  const getCampaignCount = async () => {
-    const response = await fetch("/api/campaigns");
-
-    if (response.ok) {
-      const data = await response.json();
-
-      setCampaignCount(data.length);
-    }
   };
 
   return (

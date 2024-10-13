@@ -1,3 +1,12 @@
+export type campaignDataType = {
+  companyDescription: string;
+  companyName: string;
+  id: string;
+  productDescription: string;
+  targetAudience: string;
+  userId: string;
+};
+
 export interface headerProps {
   isLoggedIn: boolean;
   setIsLoggedIn: React.Dispatch<React.SetStateAction<boolean>>;
@@ -6,6 +15,7 @@ export interface headerProps {
   setLoggedUser: React.Dispatch<React.SetStateAction<string>>;
   isLoading: boolean;
   handlePopup: Function;
+  campaignData: campaignDataType[];
 }
 
 export interface loginModalProps {
@@ -25,6 +35,7 @@ export interface messagePopupProps {
 }
 export interface campaignProps {
   handlePopup: Function;
+  campaignData: campaignDataType[];
 }
 export interface emailProps {
   handlePopup: Function;

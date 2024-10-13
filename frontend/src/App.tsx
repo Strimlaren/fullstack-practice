@@ -12,12 +12,15 @@ import Welcome from "./pages/Welcome";
 import Register from "./pages/Register";
 import MessagePopup from "./components/MessagePopup";
 
+import { campaignDataType } from "./types/types";
+
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [loggedUser, setLoggedUser] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [popupMessage, setPopupMessage] = useState<string>("");
+  const [campaignData, setCampaignData] = useState<campaignDataType[]>([]);
 
   // Checks if the user is still logged on
   useEffect(() => {
@@ -32,6 +35,7 @@ const App = () => {
           setIsLoading(false);
         } else {
           setIsLoggedIn(false);
+          setLoggedUser("");
           setIsLoading(false);
         }
       })
@@ -40,12 +44,26 @@ const App = () => {
         setIsLoading(false);
       });
   }, []);
+  // Gets campaign data and sets it in the state when user logs in.
+  // POTENTIAL ISSUE: WHEN CAMPAIGNS ARE ADDED, WILL IT REFLECT ON THE BUTTON COUNTER?
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch("/api/campaigns");
+
+      if (response.ok) {
+        const data = await response.json();
+        setCampaignData(data);
+      }
+    };
+
+    fetchData();
+  }, [isLoggedIn]);
 
   const handlePopup = async (message: string) => {
     setPopupMessage(message);
     setTimeout(() => {
       setPopupMessage("");
-    }, 3000);
+    }, 2500);
   };
 
   return (
@@ -69,6 +87,7 @@ const App = () => {
         setLoggedUser={setLoggedUser}
         isLoading={isLoading}
         handlePopup={handlePopup}
+        campaignData={campaignData}
       />
       <div className="flex justify-center items-center">
         <Routes>
@@ -83,11 +102,22 @@ const App = () => {
           />
           <Route
             path="/campaigns"
-            element={<Campaigns handlePopup={handlePopup} />}
+            element={
+              isLoggedIn ? (
+                <Campaigns
+                  handlePopup={handlePopup}
+                  campaignData={campaignData}
+                />
+              ) : (
+                <Welcome />
+              )
+            }
           />
           <Route
             path="/emails"
-            element={<Emails handlePopup={handlePopup} />}
+            element={
+              isLoggedIn ? <Emails handlePopup={handlePopup} /> : <Welcome />
+            }
           />
           <Route path="/" element={<Welcome />} />
         </Routes>

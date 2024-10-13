@@ -35,6 +35,7 @@ const LoginModal = ({
       handlePopup(`Welcome, ${email}`);
       navigate("/campaigns");
     } else {
+      setIsModalOpen(false);
       handlePopup(`Authentication failed.`);
       navigate("/");
     }
@@ -120,10 +121,10 @@ const LoginModal = ({
           <p className="text-slate-400">
             Don't have an account?
             <Link to="/register">
-              <p className="text-slate-500 hover:text-slate-700 inline">
+              <span className="text-slate-500 hover:text-slate-700 inline">
                 {" "}
                 Register
-              </p>
+              </span>
             </Link>
           </p>
         </div>
