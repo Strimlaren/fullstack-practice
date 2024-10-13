@@ -53,6 +53,8 @@ const App = () => {
       if (response.ok) {
         const data = await response.json();
         setCampaignData(data);
+      } else {
+        setCampaignData([]);
       }
     };
 
