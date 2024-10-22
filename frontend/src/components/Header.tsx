@@ -14,8 +14,6 @@ const Header = ({
 }: headerProps) => {
   const navigate = useNavigate();
 
-  console.log(campaignData);
-
   const handleLogout = async () => {
     await fetch("/api/auth/logout");
 

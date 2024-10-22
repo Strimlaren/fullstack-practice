@@ -57,7 +57,7 @@ campaignRoutes.get(
 campaignRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
   const {
     companyName,
-    companyDescription,
+    campaignDescription,
     productDescription,
     targetAudience,
     emails,
@@ -68,7 +68,7 @@ campaignRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
   const campaignAlreadyExists = await prisma.campaign.findFirst({
     where: {
       companyName: companyName,
-      companyDescription: companyDescription,
+      campaignDescription: campaignDescription,
       productDescription: productDescription,
       targetAudience: targetAudience,
     },
@@ -83,7 +83,7 @@ campaignRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
     const addCampaign = await prisma.campaign.create({
       data: {
         companyName: companyName,
-        companyDescription: companyDescription,
+        campaignDescription: campaignDescription,
         productDescription: productDescription,
         targetAudience: targetAudience,
         userId: user.id,

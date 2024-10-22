@@ -1,16 +1,16 @@
+import Campaigns from "./pages/Campaigns";
+import Emails from "./pages/Emails";
+import Welcome from "./pages/Welcome";
+import Register from "./pages/Register";
+import OneCampaign from "./pages/oneCampaign";
+
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import LoginModal from "./components/LoginModal";
-import Campaigns from "./pages/Campaigns";
-import Emails from "./pages/Emails";
+import MessagePopup from "./components/MessagePopup";
 
 import { useState, useEffect } from "react";
-
 import { Routes, Route } from "react-router-dom";
-
-import Welcome from "./pages/Welcome";
-import Register from "./pages/Register";
-import MessagePopup from "./components/MessagePopup";
 
 import { campaignDataType } from "./types/types";
 
@@ -107,6 +107,19 @@ const App = () => {
             element={
               isLoggedIn ? (
                 <Campaigns
+                  handlePopup={handlePopup}
+                  campaignData={campaignData}
+                />
+              ) : (
+                <Welcome />
+              )
+            }
+          />
+          <Route
+            path="/campaigns/:id"
+            element={
+              isLoggedIn ? (
+                <OneCampaign
                   handlePopup={handlePopup}
                   campaignData={campaignData}
                 />

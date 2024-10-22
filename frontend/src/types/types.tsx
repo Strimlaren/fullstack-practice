@@ -33,10 +33,17 @@ export interface registerProps {
 export interface messagePopupProps {
   message: string;
 }
+
 export interface campaignProps {
   handlePopup: Function;
   campaignData: campaignDataType[];
 }
+
 export interface emailProps {
   handlePopup: Function;
+}
+
+export interface oneCampaignType {
+  handlePopup: Function;
+  campaignData: campaignDataType[];
 }

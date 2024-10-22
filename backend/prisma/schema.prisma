@@ -15,14 +15,15 @@ model User {
 }
 
 model Campaign {
-  id                 String  @id @default(uuid())
-  companyName        String
-  companyDescription String
-  productDescription String
-  targetAudience     String
-  emails             Email[]
-  userId             String
-  user               User    @relation(fields: [userId], references: [id])
+  id                  String   @id @default(uuid())
+  companyName         String
+  campaignDescription String
+  productDescription  String
+  targetAudience      String
+  emails              Email[]
+  userId              String
+  createdAt           DateTime @default(now()) @db.Timestamp
+  user                User     @relation(fields: [userId], references: [id])
 }
 
 model Email {
