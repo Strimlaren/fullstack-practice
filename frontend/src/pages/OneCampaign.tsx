@@ -25,6 +25,16 @@ export default function OneCampaign({
     }
   }, [id, campaignData, navigate]);
 
+  // const handleChange = (
+  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  // ) => {
+  //   const { name, value } = e.target;
+  //   setThisCampaign((prevData) => ({
+  //     ...prevData,
+  //     [name]: value,
+  //   }));
+  // };
+
   if (!thisCampaign) {
     return <div className="flex justify-center items-center">Loading...</div>;
   }
@@ -36,7 +46,7 @@ export default function OneCampaign({
           <h2 className="font-bold text-lg">
             {thisCampaign.campaignDescription}
           </h2>
-          <p className="text-gray-400 text-xs">
+          <p className="text-black opacity-40 text-xs">
             {thisCampaign.createdAt.slice(0, 16).replace("T", " ")}
           </p>
         </div>
@@ -55,12 +65,71 @@ export default function OneCampaign({
   return (
     <div className="flex flex-col items-center">
       {secondaryHeader()}
-      <div className="flex justify-center items-center mt-20 w-96 flex-col bg-red-50">
-        <h2 className="font-black text-5xl">{thisCampaign.companyName}</h2>
+      <div className="flex justify-center mt-20 w-3/4 flex-col">
+        <h2 className="font-black text-2xl">Campaign Details</h2>
+        <p className="text-black opacity-40">
+          Details about the marketing campaign.
+        </p>
+        <form className="flex flex-col mt-4">
+          <div className="flex gap-3 w-full">
+            <div className="w-1/2">
+              <label htmlFor="companyName">Company Name:</label>
+              <br />
+              <input
+                className="w-full"
+                type="text"
+                id="companyName"
+                name="companyName"
+                value={thisCampaign.companyName}
+                // onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="w-1/2">
+              <label htmlFor="campaignDescription">Company Description:</label>
+              <br />
+              <textarea
+                className="w-full"
+                id="campaignDescription"
+                name="campaignDescription"
+                value={thisCampaign.campaignDescription}
+                // onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+          <div className="flex gap-3">
+            <div className="w-1/2">
+              <label htmlFor="productDescription">Product Description:</label>
+              <br />
+              <textarea
+                className="w-full"
+                id="productDescription"
+                name="productDescription"
+                value={thisCampaign.productDescription}
+                // onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="w-1/2">
+              <label htmlFor="targetAudience">Target Audience:</label>
+              <br />
+              <textarea
+                className="w-full"
+                id="targetAudience"
+                name="targetAudience"
+                value={thisCampaign.targetAudience}
+                // onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+        </form>
         <div className="flex flex-col w-96">
           <div className="flex">
-            <div className="w-1/2 font-bold">Company Description:</div>
-            <div className="w-1/2">{thisCampaign.companyDescription}</div>
+            <div className="w-1/2 font-bold">Campaign Description:</div>
+            <div className="w-1/2">{thisCampaign.campaignDescription}</div>
           </div>
           <div className="flex">
             <div className="w-1/2 font-bold">Product Description:</div>

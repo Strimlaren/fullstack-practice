@@ -10,7 +10,7 @@ export default function Campaigns({
       <div className="w-screen flex justify-between p-2 gap-2 items-end shadow-md">
         <div className="flex gap-5 items-center">
           <h2 className="font-bold text-lg">{"Spam Campaigns"}</h2>
-          <p className="text-gray-400 text-xs">{}</p>
+          <p className="text-black opacity-40 text-xs">{}</p>
         </div>
         <div className="flex gap-2 items-center">
           <Link to="/">
@@ -33,7 +33,7 @@ export default function Campaigns({
               return (
                 <Link to={`/campaigns/${campaign.id}`} key={index}>
                   <li className="shadow p-2 w-48 flex flex-col hover:shadow-lg transition-all hover:cursor-pointer hover: rounded-md hover:-translate-y-px">
-                    <h2 className="text-md font-bold uppercase text-orange-700">
+                    <h2 className="text-md font-bold uppercase text-black">
                       {campaign.campaignDescription}
                     </h2>
                     <p className="text-xs font-semibold text-gray-600 uppercase">

@@ -1,10 +1,11 @@
 export type campaignDataType = {
-  companyDescription: string;
+  campaignDescription: string;
   companyName: string;
   id: string;
   productDescription: string;
   targetAudience: string;
   userId: string;
+  createdAt: string;
 };
 
 export interface headerProps {

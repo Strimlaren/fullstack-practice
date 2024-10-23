@@ -75,10 +75,20 @@ body {
 .link {
   font-size: small;
   margin-right: 0.5rem;
-  color: rgb(156 163 175);
+  color: black;
+  opacity: .4;
   transition: all .3s;
 }
 
 .link:hover {
   color: black;
+  opacity: 1;
+}
+
+input,
+textarea {
+  border: 1px solid rgba(0, 0, 0, 0.13);
+  padding: 0.2rem;
+  resize: none;
+  border-radius: 5px;
 }
