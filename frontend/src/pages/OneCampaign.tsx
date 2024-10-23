@@ -10,6 +10,7 @@ export default function OneCampaign({
   const [thisCampaign, setThisCampaign] = useState<campaignDataType | null>(
     null
   );
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -54,7 +55,9 @@ export default function OneCampaign({
           <Link to="/campaigns">
             <p className="text-sm mr-2 link">← Back to Campaigns</p>
           </Link>
-          <p className="button2">Edit</p>
+          <a className="button2" onClick={() => setIsEditing((prev) => !prev)}>
+            {isEditing ? "Save" : "Edit"}
+          </a>
           <p className="buttonRed">Delete</p>
           <p className="button2">Rename</p>
         </div>
@@ -82,6 +85,7 @@ export default function OneCampaign({
                 name="companyName"
                 value={thisCampaign.companyName}
                 // onChange={handleChange}
+                disabled={!isEditing}
                 required
               />
             </div>
@@ -94,6 +98,7 @@ export default function OneCampaign({
                 name="campaignDescription"
                 value={thisCampaign.campaignDescription}
                 // onChange={handleChange}
+                disabled={!isEditing}
                 required
               />
             </div>
@@ -109,6 +114,7 @@ export default function OneCampaign({
                 name="productDescription"
                 value={thisCampaign.productDescription}
                 // onChange={handleChange}
+                disabled={!isEditing}
                 required
               />
             </div>
@@ -121,6 +127,7 @@ export default function OneCampaign({
                 name="targetAudience"
                 value={thisCampaign.targetAudience}
                 // onChange={handleChange}
+                disabled={!isEditing}
                 required
               />
             </div>
