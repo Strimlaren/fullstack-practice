@@ -36,13 +36,13 @@ campaignRoutes.get(
       return res.status(401).json({ message: "User needs to be logged in." });
 
     const user = req.user as User;
-    const campaignID = req.params.id;
+    const campaignId = req.params.id;
 
     try {
       const campaign = await prisma.campaign.findUnique({
         where: {
           userId: user.id,
-          id: campaignID,
+          id: campaignId,
         },
       });
       return res.status(200).json(campaign);
@@ -98,5 +98,38 @@ campaignRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
     res.status(500).json({ message: "Could not create new campaign.", err });
   }
 });
+// EDIT CAMPAIGN
+campaignRoutes.put(
+  "/:id",
+  async (req: Request, res: Response): Promise<any> => {
+    if (!req.user)
+      return res.status(401).json({ message: "User needs to be logged in." });
 
+    const campaignId = req.params.id;
+    const {
+      companyName,
+      productDescription,
+      targetAudience,
+      campaignDescription,
+    } = req.body;
+
+    try {
+      const updatedCampaign = await prisma.campaign.update({
+        where: {
+          id: campaignId,
+        },
+        data: {
+          companyName: companyName,
+          productDescription: productDescription,
+          targetAudience: targetAudience,
+          campaignDescription: campaignDescription,
+        },
+      });
+      res.status(200).json({ updatedCampaign });
+    } catch (err) {
+      console.error("Error updating campaign:", err);
+      return res.status(500).json({ message: "Could not update campaign." });
+    }
+  }
+);
 export default campaignRoutes;

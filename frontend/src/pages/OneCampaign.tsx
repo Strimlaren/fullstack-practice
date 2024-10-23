@@ -45,6 +45,32 @@ export default function OneCampaign({
     return <div className="flex justify-center items-center">Loading...</div>;
   }
 
+  const handleEditSave = async () => {
+    if (!isEditing) {
+      setIsEditing(true);
+      return;
+    }
+
+    try {
+      await fetch(`/api/campaigns/${id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyName: thisCampaign.companyName,
+          productDescription: thisCampaign.productDescription,
+          targetAudience: thisCampaign.targetAudience,
+          campaignDescription: thisCampaign.campaignDescription,
+        }),
+      });
+    } catch (err) {
+      console.error("Could not update campaign.");
+      handlePopup("Could not update campaign.");
+    }
+    setIsEditing(false);
+  };
+
   const secondaryHeader = () => {
     return (
       <div className="w-screen flex justify-between p-2 gap-2 items-end shadow-md">
@@ -60,7 +86,7 @@ export default function OneCampaign({
           <Link to="/campaigns">
             <p className="text-sm mr-2 link">← Back to Campaigns</p>
           </Link>
-          <a className="button2" onClick={() => setIsEditing((prev) => !prev)}>
+          <a className="button2" onClick={handleEditSave}>
             {isEditing ? "Save" : "Edit"}
           </a>
           <p className="buttonRed">Delete</p>
