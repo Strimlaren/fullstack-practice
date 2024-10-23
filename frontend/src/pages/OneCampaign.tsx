@@ -26,15 +26,20 @@ export default function OneCampaign({
     }
   }, [id, campaignData, navigate]);
 
-  // const handleChange = (
-  //   e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  // ) => {
-  //   const { name, value } = e.target;
-  //   setThisCampaign((prevData) => ({
-  //     ...prevData,
-  //     [name]: value,
-  //   }));
-  // };
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setThisCampaign((prevData) => {
+      if (prevData === null) {
+        return null; // Handle case when prevData is null
+      }
+
+      return {
+        ...prevData,
+        [e.target.name]: e.target.value,
+      };
+    });
+  };
 
   if (!thisCampaign) {
     return <div className="flex justify-center items-center">Loading...</div>;
@@ -84,7 +89,7 @@ export default function OneCampaign({
                 id="companyName"
                 name="companyName"
                 value={thisCampaign.companyName}
-                // onChange={handleChange}
+                onChange={handleChange}
                 disabled={!isEditing}
                 required
               />
@@ -97,7 +102,7 @@ export default function OneCampaign({
                 id="campaignDescription"
                 name="campaignDescription"
                 value={thisCampaign.campaignDescription}
-                // onChange={handleChange}
+                onChange={handleChange}
                 disabled={!isEditing}
                 required
               />
@@ -113,7 +118,7 @@ export default function OneCampaign({
                 id="productDescription"
                 name="productDescription"
                 value={thisCampaign.productDescription}
-                // onChange={handleChange}
+                onChange={handleChange}
                 disabled={!isEditing}
                 required
               />
@@ -126,14 +131,14 @@ export default function OneCampaign({
                 id="targetAudience"
                 name="targetAudience"
                 value={thisCampaign.targetAudience}
-                // onChange={handleChange}
+                onChange={handleChange}
                 disabled={!isEditing}
                 required
               />
             </div>
           </div>
         </form>
-        <div className="flex flex-col w-96">
+        {/* <div className="flex flex-col w-96">
           <div className="flex">
             <div className="w-1/2 font-bold">Campaign Description:</div>
             <div className="w-1/2">{thisCampaign.campaignDescription}</div>
@@ -146,7 +151,7 @@ export default function OneCampaign({
             <div className="w-1/2 font-bold">Target Audience:</div>
             <div className="w-1/2">{thisCampaign.targetAudience}</div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
