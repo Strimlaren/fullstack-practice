@@ -132,5 +132,23 @@ campaignRoutes.put(
     }
   }
 );
+// DELETE CAMPAIGN
+campaignRoutes.delete(
+  "/:id",
+  async (req: Request, res: Response): Promise<any> => {
+    const { id } = req.params;
 
+    try {
+      const removedCampaign = await prisma.campaign.delete({
+        where: {
+          id: id,
+        },
+      });
+      res.status(200).json(removedCampaign);
+    } catch (err) {
+      console.error("Could not delete campaign.", err);
+      res.status(404).json({ message: "Could not delete campaign." });
+    }
+  }
+);
 export default campaignRoutes;

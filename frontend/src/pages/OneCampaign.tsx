@@ -66,7 +66,7 @@ export default function OneCampaign({
         }),
       });
     } catch (err) {
-      console.error("Could not update campaign.");
+      console.error("Could not update campaign.", err);
       handlePopup("Could not update campaign.");
     }
     setIsEditing(false);
@@ -79,7 +79,21 @@ export default function OneCampaign({
     }, 3000);
   };
 
-  const handleDelete = async () => {};
+  const handleDelete = async () => {
+    try {
+      await fetch(`/api/campaigns/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+    } catch (err) {
+      console.error("Could not delete campaign.", err);
+      handlePopup("Could not delete campaign.");
+      return;
+    }
+    navigate("/campaigns");
+  };
 
   const secondaryHeader = () => {
     return (
