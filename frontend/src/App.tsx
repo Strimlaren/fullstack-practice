@@ -46,19 +46,19 @@ const App = () => {
   }, []);
   // Gets campaign data and sets it in the state when user logs in.
   // POTENTIAL ISSUE: WHEN CAMPAIGNS ARE ADDED, WILL IT REFLECT ON THE BUTTON COUNTER?
+  const updateCampaigns = async () => {
+    const response = await fetch("/api/campaigns");
+
+    if (response.ok) {
+      const data = await response.json();
+      setCampaignData(data);
+    } else {
+      setCampaignData([]);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch("/api/campaigns");
-
-      if (response.ok) {
-        const data = await response.json();
-        setCampaignData(data);
-      } else {
-        setCampaignData([]);
-      }
-    };
-
-    fetchData();
+    updateCampaigns();
   }, [isLoggedIn]);
 
   const handlePopup = async (message: string) => {
@@ -109,6 +109,7 @@ const App = () => {
                 <Campaigns
                   handlePopup={handlePopup}
                   campaignData={campaignData}
+                  updateCampaigns={updateCampaigns}
                 />
               ) : (
                 <Welcome />

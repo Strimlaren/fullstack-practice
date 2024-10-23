@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 export default function Campaigns({
   handlePopup,
   campaignData,
+  updateCampaigns,
 }: campaignProps) {
   const secondaryHeader = () => {
     return (
@@ -21,6 +22,8 @@ export default function Campaigns({
       </div>
     );
   };
+
+  updateCampaigns();
 
   return (
     <div className="flex flex-col items-center">

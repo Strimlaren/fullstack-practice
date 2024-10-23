@@ -38,6 +38,7 @@ export interface messagePopupProps {
 export interface campaignProps {
   handlePopup: Function;
   campaignData: campaignDataType[];
+  updateCampaigns: Function;
 }
 
 export interface emailProps {

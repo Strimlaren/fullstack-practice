@@ -26,12 +26,16 @@ export default function OneCampaign({
     }
   }, [id, campaignData, navigate]);
 
-  const handleChange = (
+  if (!thisCampaign) {
+    return <div className="flex justify-center items-center">Loading...</div>;
+  }
+
+  const handleChangeFields = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setThisCampaign((prevData) => {
       if (prevData === null) {
-        return null; // Handle case when prevData is null
+        return null;
       }
 
       return {
@@ -40,10 +44,6 @@ export default function OneCampaign({
       };
     });
   };
-
-  if (!thisCampaign) {
-    return <div className="flex justify-center items-center">Loading...</div>;
-  }
 
   const handleEditSave = async () => {
     if (!isEditing) {
@@ -115,7 +115,7 @@ export default function OneCampaign({
                 id="companyName"
                 name="companyName"
                 value={thisCampaign.companyName}
-                onChange={handleChange}
+                onChange={handleChangeFields}
                 disabled={!isEditing}
                 required
               />
@@ -128,7 +128,7 @@ export default function OneCampaign({
                 id="campaignDescription"
                 name="campaignDescription"
                 value={thisCampaign.campaignDescription}
-                onChange={handleChange}
+                onChange={handleChangeFields}
                 disabled={!isEditing}
                 required
               />
@@ -144,7 +144,7 @@ export default function OneCampaign({
                 id="productDescription"
                 name="productDescription"
                 value={thisCampaign.productDescription}
-                onChange={handleChange}
+                onChange={handleChangeFields}
                 disabled={!isEditing}
                 required
               />
@@ -157,7 +157,7 @@ export default function OneCampaign({
                 id="targetAudience"
                 name="targetAudience"
                 value={thisCampaign.targetAudience}
-                onChange={handleChange}
+                onChange={handleChangeFields}
                 disabled={!isEditing}
                 required
               />
