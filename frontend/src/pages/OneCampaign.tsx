@@ -11,6 +11,7 @@ export default function OneCampaign({
     null
   );
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [deleteInitiated, setDeleteInitiated] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -71,6 +72,15 @@ export default function OneCampaign({
     setIsEditing(false);
   };
 
+  const handleConfirmDelete = () => {
+    setDeleteInitiated(true);
+    setTimeout(() => {
+      setDeleteInitiated(false);
+    }, 3000);
+  };
+
+  const handleDelete = async () => {};
+
   const secondaryHeader = () => {
     return (
       <div className="w-screen flex justify-between p-2 gap-2 items-end shadow-md">
@@ -89,7 +99,16 @@ export default function OneCampaign({
           <a className="button2" onClick={handleEditSave}>
             {isEditing ? "Save" : "Edit"}
           </a>
-          <p className="buttonRed">Delete</p>
+          {deleteInitiated ? (
+            <a className="buttonRed" onClick={handleDelete}>
+              Confirm?
+            </a>
+          ) : (
+            <a className="buttonRed" onClick={handleConfirmDelete}>
+              Delete
+            </a>
+          )}
+
           <p className="button2">Rename</p>
         </div>
       </div>

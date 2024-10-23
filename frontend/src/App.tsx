@@ -23,7 +23,7 @@ const App = () => {
   const [campaignData, setCampaignData] = useState<campaignDataType[]>([]);
 
   // Checks if the user is still logged on
-  useEffect(() => {
+  const checkLoginStatus = async () => {
     fetch("/api/auth/status", {
       credentials: "include",
     })
@@ -43,6 +43,10 @@ const App = () => {
         console.error("Error checking session:", error);
         setIsLoading(false);
       });
+  };
+
+  useEffect(() => {
+    checkLoginStatus();
   }, []);
   // Gets campaign data and sets it in the state when user logs in.
   // POTENTIAL ISSUE: WHEN CAMPAIGNS ARE ADDED, WILL IT REFLECT ON THE BUTTON COUNTER?
