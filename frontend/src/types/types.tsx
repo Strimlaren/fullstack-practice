@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type campaignDataType = {
   campaignDescription: string;
   companyName: string;
@@ -48,4 +50,9 @@ export interface emailProps {
 export interface oneCampaignType {
   handlePopup: Function;
   campaignData: campaignDataType[];
+}
+
+export interface ProgressButtonProps {
+  onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  children: ReactNode;
 }

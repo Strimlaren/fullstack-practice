@@ -2,7 +2,7 @@ import Campaigns from "./pages/Campaigns";
 import Emails from "./pages/Emails";
 import Welcome from "./pages/Welcome";
 import Register from "./pages/Register";
-import OneCampaign from "./pages/oneCampaign";
+import OneCampaign from "./pages/OneCampaign";
 
 import Footer from "./components/Footer";
 import Header from "./components/Header";

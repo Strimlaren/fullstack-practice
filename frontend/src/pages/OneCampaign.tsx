@@ -3,6 +3,10 @@ import { campaignDataType, oneCampaignType } from "../types/types";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import ProgressButton from "../components/ProgressButton";
+
+import { CONFIRM_DELETE_MS } from "../utils/constants";
+
 export default function OneCampaign({
   handlePopup,
   campaignData,
@@ -76,7 +80,7 @@ export default function OneCampaign({
     setDeleteInitiated(true);
     setTimeout(() => {
       setDeleteInitiated(false);
-    }, 3000);
+    }, CONFIRM_DELETE_MS);
   };
 
   const handleDelete = async () => {
@@ -110,19 +114,19 @@ export default function OneCampaign({
           <Link to="/campaigns">
             <p className="text-sm mr-2 link">← Back to Campaigns</p>
           </Link>
-          <a className="button2" onClick={handleEditSave}>
+          <button className="button2" onClick={handleEditSave}>
             {isEditing ? "Save" : "Edit"}
-          </a>
+          </button>
           {deleteInitiated ? (
-            <a className="buttonRed" onClick={handleDelete}>
-              Confirm?
-            </a>
+            <ProgressButton onClick={handleDelete}> Confirm?</ProgressButton>
           ) : (
-            <a className="buttonRed" onClick={handleConfirmDelete}>
+            // <button className="buttonRed" onClick={handleDelete}>
+            //   Confirm?
+            // </button>
+            <button className="buttonRed" onClick={handleConfirmDelete}>
               Delete
-            </a>
+            </button>
           )}
-
           <p className="button2">Rename</p>
         </div>
       </div>
