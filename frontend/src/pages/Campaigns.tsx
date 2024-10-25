@@ -6,6 +6,7 @@ export default function Campaigns({
   handlePopup,
   campaignData,
   updateCampaigns,
+  checkLoginStatus,
 }: campaignProps) {
   const secondaryHeader = () => {
     return (
@@ -23,6 +24,10 @@ export default function Campaigns({
       </div>
     );
   };
+
+  useEffect(() => {
+    checkLoginStatus();
+  }, []);
 
   useEffect(() => {
     updateCampaigns();

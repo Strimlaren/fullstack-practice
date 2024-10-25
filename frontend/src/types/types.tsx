@@ -41,6 +41,7 @@ export interface campaignProps {
   handlePopup: Function;
   campaignData: campaignDataType[];
   updateCampaigns: Function;
+  checkLoginStatus: Function;
 }
 
 export interface emailProps {

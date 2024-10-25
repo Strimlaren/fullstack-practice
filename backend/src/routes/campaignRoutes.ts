@@ -138,6 +138,9 @@ campaignRoutes.delete(
   async (req: Request, res: Response): Promise<any> => {
     const { id } = req.params;
 
+    if (!req.user)
+      return res.status(401).json({ message: "User needs to be logged in." });
+
     try {
       const removedCampaign = await prisma.campaign.delete({
         where: {

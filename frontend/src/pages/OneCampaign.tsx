@@ -85,12 +85,16 @@ export default function OneCampaign({
 
   const handleDelete = async () => {
     try {
-      await fetch(`/api/campaigns/${id}`, {
+      const response = await fetch(`/api/campaigns/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
+      if (response.status === 401) {
+        handlePopup("User session expired. Action not allowed.");
+        navigate("/campaigns");
+      }
     } catch (err) {
       console.error("Could not delete campaign.", err);
       handlePopup("Could not delete campaign.");
@@ -118,11 +122,8 @@ export default function OneCampaign({
             {isEditing ? "Save" : "Edit"}
           </button>
           {deleteInitiated ? (
-            <ProgressButton onClick={handleDelete}> Confirm?</ProgressButton>
+            <ProgressButton onClick={handleDelete}>Confirm?</ProgressButton>
           ) : (
-            // <button className="buttonRed" onClick={handleDelete}>
-            //   Confirm?
-            // </button>
             <button className="buttonRed" onClick={handleConfirmDelete}>
               Delete
             </button>

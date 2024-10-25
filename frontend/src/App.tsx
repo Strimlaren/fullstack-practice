@@ -114,6 +114,7 @@ const App = () => {
                   handlePopup={handlePopup}
                   campaignData={campaignData}
                   updateCampaigns={updateCampaigns}
+                  checkLoginStatus={checkLoginStatus}
                 />
               ) : (
                 <Welcome />
