@@ -53,7 +53,13 @@ export interface oneCampaignType {
   campaignData: campaignDataType[];
 }
 
-export interface ProgressButtonProps {
+export interface progressButtonProps {
+  animationDurationMs: number;
   onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children: ReactNode;
+}
+
+export interface navContentProps {
+  campaigns: number;
+  handleLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }

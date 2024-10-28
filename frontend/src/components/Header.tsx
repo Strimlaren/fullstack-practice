@@ -2,6 +2,8 @@ import { headerProps } from "../types/types";
 import { EnvelopeOpenIcon } from "@heroicons/react/24/outline";
 import { Link, useNavigate } from "react-router-dom";
 
+import { NavContent } from "./NavContent";
+
 const Header = ({
   isLoggedIn,
   setIsLoggedIn,
@@ -23,27 +25,6 @@ const Header = ({
     navigate("/");
   };
 
-  const navContent = () => {
-    return (
-      <aside className="flex gap-2">
-        <Link to="/campaigns">
-          <p className="button1">
-            Campaigns{" "}
-            <span className="bg-white text-black ml-1 px-3 rounded-full font-semibold toaster">
-              {campaignData.length}
-            </span>
-          </p>
-        </Link>
-        <Link to="/emails">
-          <p className="button1">Emails</p>
-        </Link>
-        <a onClick={handleLogout} className="button1">
-          Logout
-        </a>
-      </aside>
-    );
-  };
-
   return (
     <div className="shadow p-2 flex justify-between items-center">
       <div className="flex gap-2 items-center justify-center">
@@ -61,13 +42,16 @@ const Header = ({
               <p>
                 Welcome, <span className="text-orange-700">{loggedUser}</span>
               </p>
-              {navContent()}
+              <NavContent
+                campaigns={campaignData.length}
+                handleLogout={handleLogout}
+              />
             </div>
           ) : (
             <>
-              <a onClick={() => setIsModalOpen(true)} className="button1">
+              <button onClick={() => setIsModalOpen(true)} className="button1">
                 Login
-              </a>
+              </button>
               <Link to="/register">
                 <p className="button1">Register</p>
               </Link>

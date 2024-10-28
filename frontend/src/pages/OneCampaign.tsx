@@ -1,8 +1,8 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { campaignDataType, oneCampaignType } from "../types/types";
 import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
+import { campaignDataType, oneCampaignType } from "../types/types";
 import ProgressButton from "../components/ProgressButton";
 
 import { CONFIRM_DELETE_MS } from "../utils/constants";
@@ -57,7 +57,7 @@ export default function OneCampaign({
     }
 
     try {
-      await fetch(`/api/campaigns/${id}`, {
+      const response = await fetch(`/api/campaigns/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -69,6 +69,10 @@ export default function OneCampaign({
           campaignDescription: thisCampaign.campaignDescription,
         }),
       });
+      if (response.status === 401) {
+        handlePopup("User session expired. Action not allowed.");
+        navigate("/campaigns");
+      }
     } catch (err) {
       console.error("Could not update campaign.", err);
       handlePopup("Could not update campaign.");
@@ -122,13 +126,16 @@ export default function OneCampaign({
             {isEditing ? "Save" : "Edit"}
           </button>
           {deleteInitiated ? (
-            <ProgressButton onClick={handleDelete}>Confirm?</ProgressButton>
+            <ProgressButton
+              animationDurationMs={CONFIRM_DELETE_MS}
+              onClick={handleDelete}>
+              Confirm?
+            </ProgressButton>
           ) : (
             <button className="buttonRed" onClick={handleConfirmDelete}>
               Delete
             </button>
           )}
-          <p className="button2">Rename</p>
         </div>
       </div>
     );
@@ -159,7 +166,7 @@ export default function OneCampaign({
               />
             </div>
             <div className="w-1/2">
-              <label htmlFor="campaignDescription">Company Description:</label>
+              <label htmlFor="campaignDescription">Campaign Description:</label>
               <br />
               <textarea
                 className="w-full"

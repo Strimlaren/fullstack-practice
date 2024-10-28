@@ -1,7 +1,10 @@
-import { CONFIRM_DELETE_MS } from "../utils/constants";
-import { ProgressButtonProps } from "../types/types";
+import { progressButtonProps } from "../types/types";
 
-const ProgressButton = ({ onClick, children }: ProgressButtonProps) => {
+const ProgressButton = ({
+  animationDurationMs,
+  onClick,
+  children,
+}: progressButtonProps) => {
   return (
     <button
       onClick={onClick}
@@ -24,7 +27,7 @@ const ProgressButton = ({ onClick, children }: ProgressButtonProps) => {
           width: "100%",
           height: "100%",
           backgroundColor: "rgb(160, 0, 0)",
-          animation: `progressAnimation ${CONFIRM_DELETE_MS}ms linear forwards`,
+          animation: `progressAnimation ${animationDurationMs}ms linear forwards`,
         }}
       />
       <style>{`
