@@ -63,3 +63,7 @@ export interface navContentProps {
   campaigns: number;
   handleLogout: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
+
+export interface newCampaignProps {
+  handlePopup: Function;
+}

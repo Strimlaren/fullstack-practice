@@ -1,5 +1,8 @@
 import { ChangeEvent, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { newCampaignProps } from "../types/types";
 
 interface form {
   companyName: string;
@@ -8,7 +11,7 @@ interface form {
   targetAudience: string;
 }
 
-export default function NewCampaign() {
+export default function NewCampaign({ handlePopup }: newCampaignProps) {
   const [campaignForm, setCampaignForm] = useState<form>({
     companyName: "",
     campaignDescription: "",
@@ -16,6 +19,7 @@ export default function NewCampaign() {
     targetAudience: "",
   });
   const [isFormFilled, setIsFormFilled] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const secondaryHeader = () => {
     return (
@@ -58,7 +62,38 @@ export default function NewCampaign() {
     });
   };
 
-  const handleSubmitNewCampaign = async () => {};
+  const handleSubmitNewCampaign: (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => Promise<void> = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch("/api/campaigns/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          companyName: campaignForm.companyName,
+          campaignDescription: campaignForm.campaignDescription,
+          productDescription: campaignForm.productDescription,
+          targetAudience: campaignForm.targetAudience,
+        }),
+      });
+
+      if (response.status === 406) {
+        console.error("An identical campaign already exists.");
+        handlePopup("An identical campaign already exists.");
+        return;
+      }
+    } catch (err) {
+      console.error(err);
+      handlePopup("Something went wrong when adding new campaign.");
+    }
+    console.log("time to navigate");
+    handlePopup(`Successfully added ${campaignForm.campaignDescription}.`);
+    navigate("/campaigns");
+  };
 
   return (
     <div className="flex flex-col items-center">
@@ -68,7 +103,7 @@ export default function NewCampaign() {
         <p className="text-black opacity-40">
           Enter the details about your new spam campaign.
         </p>
-        <form action="/api" method="POST" className="flex flex-col mt-4">
+        <form className="flex flex-col mt-4">
           <label htmlFor="companyName">
             <strong>Company Name:</strong>
           </label>

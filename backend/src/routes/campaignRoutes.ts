@@ -60,7 +60,6 @@ campaignRoutes.post("/", async (req: Request, res: Response): Promise<any> => {
     campaignDescription,
     productDescription,
     targetAudience,
-    emails,
   } = req.body;
 
   const user = req.user as User;

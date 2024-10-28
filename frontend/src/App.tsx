@@ -137,7 +137,13 @@ const App = () => {
           />
           <Route
             path="/new-campaign"
-            element={isLoggedIn ? <NewCampaign /> : <Welcome />}
+            element={
+              isLoggedIn ? (
+                <NewCampaign handlePopup={handlePopup} />
+              ) : (
+                <Welcome />
+              )
+            }
           />
           <Route
             path="/emails"
