@@ -37,6 +37,11 @@ body {
   cursor: pointer;
 }
 
+.button1:disabled {
+  background-color: gray;
+  cursor: no-drop;
+}
+
 .loadingButton {
   padding: .5rem 1rem;
   color: whitesmoke;
@@ -74,14 +79,12 @@ body {
 
 .link {
   font-size: small;
-  margin-right: 0.5rem;
   color: black;
   opacity: .4;
   transition: all .3s;
 }
 
 .link:hover {
-  color: black;
   opacity: 1;
 }
 

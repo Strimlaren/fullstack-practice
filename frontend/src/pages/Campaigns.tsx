@@ -19,7 +19,9 @@ export default function Campaigns({
           <Link to="/">
             <p className="text-sm mr-2 link">← Home</p>
           </Link>
-          <p className="button2">+ New Campaign</p>
+          <Link to="/new-campaign">
+            <p className="button2">+ New Campaign</p>
+          </Link>
         </div>
       </div>
     );
@@ -27,9 +29,6 @@ export default function Campaigns({
 
   useEffect(() => {
     checkLoginStatus();
-  }, []);
-
-  useEffect(() => {
     updateCampaigns();
   }, []);
 

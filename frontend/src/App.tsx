@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 
 import { campaignDataType } from "./types/types";
+import NewCampaign from "./pages/NewCampaign";
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -133,6 +134,10 @@ const App = () => {
                 <Welcome />
               )
             }
+          />
+          <Route
+            path="/new-campaign"
+            element={isLoggedIn ? <NewCampaign /> : <Welcome />}
           />
           <Route
             path="/emails"
