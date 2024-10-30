@@ -39,3 +39,19 @@ app.use("/api/campaigns", campaignRoutes);
 app.listen(process.env.PORT, () =>
   console.log(`Server running on port ${process.env.PORT || 3000}.`)
 );
+
+function testFunction() {
+  console.log("test");
+}
+
+const testFunction2 = () => {
+  console.log("test2");
+};
+
+const testFunction3 = async () => {
+  console.log("test3");
+};
+
+const testFunction4 = async (var1: string): Promise<void> => {
+  console.log("test4");
+};

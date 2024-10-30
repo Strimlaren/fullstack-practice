@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { campaignProps } from "../types/types";
 import { Link } from "react-router-dom";
 
@@ -8,6 +8,8 @@ export default function Campaigns({
   updateCampaigns,
   checkLoginStatus,
 }: campaignProps) {
+  const [isLoading, setIsLoading] = useState<boolean>(true);
+
   const secondaryHeader = () => {
     return (
       <div className="w-screen flex justify-between p-2 gap-2 items-end shadow-md">
@@ -28,9 +30,16 @@ export default function Campaigns({
   };
 
   useEffect(() => {
-    checkLoginStatus();
-    updateCampaigns();
+    const fetchCampaigns = async () => {
+      await checkLoginStatus();
+      await updateCampaigns();
+      setIsLoading(false);
+    };
+
+    fetchCampaigns();
   }, []);
+
+  if (isLoading) return <p className="mt-48">Loading Campaigns...</p>;
 
   return (
     <div className="flex flex-col items-center">

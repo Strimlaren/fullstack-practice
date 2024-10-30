@@ -50,7 +50,6 @@ const App = () => {
     checkLoginStatus();
   }, []);
   // Gets campaign data and sets it in the state when user logs in.
-  // POTENTIAL ISSUE: WHEN CAMPAIGNS ARE ADDED, WILL IT REFLECT ON THE BUTTON COUNTER?
   const updateCampaigns = async () => {
     const response = await fetch("/api/campaigns");
 
